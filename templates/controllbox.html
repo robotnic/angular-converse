@@ -1,0 +1,38 @@
+ <div id="controlbox" class="chatbox" style="display: block;">
+            <div class="box-flyout" style="height: 400px" ng-init="contacts=true;login=true">
+                <div class="dragresize dragresize-tm"></div>
+                <div class="chat-head controlbox-head">
+                    <ul id="controlbox-tabs" ng-show="!page.xmpp.data.connected">
+                        <li><a  ng-class="{'current':login!==false,'s':login==false}" ng-click="login=true" class="current" href="#login-dialog">Sign in</a> </li>
+                        <li><a  ng-class="{'s':login,'current':login==false}" href="#register"ng-click="login=false"class="s" href="#register">Register</a> </li>
+                    </ul>
+                    <ul id="controlbox-tabs" ng-show="page.xmpp.data.connected">
+                        <li><a  ng-class="{'current':contacts!==false,'s':contacts==false}" ng-click="contacts=true">Contacts</a> </li>
+                        <li><a  ng-class="{'s':contacts,'current':contacts==false}" href="#register"ng-click="contacts=false">Rooms</a> </li>
+                    </ul>
+                    <a class="close-chatbox-button icon-close"></a>
+                </div>
+                <div class="controlbox-panes">
+                    <div ng-show="login" ng-include="'templates/login.html'"></div>
+                    <div ng-show="!login" ng-include="'templates/register.html'"></div>
+                </div>
+                <div class="controlbox-panes" ng-show="page.xmpp.data.connected">
+                        <div ng-include="'templates/roster.html'"></div>
+                <div id="chatrooms" class="controlbox-pane" ng-show="!contacts">
+                    <form class="add-chatroom" action="" method="post">{{substate}}
+                        <label>Room name</label>
+                        <input type="text" name="chatroom" class="new-chatroom-name" placeholder="Room name">
+                        <label>Nickname</label>
+                        <input type="text" name="nick" class="new-chatroom-nick" placeholder="Nickname">
+                        <label>Server</label>
+                        <input type="text" name="server" class="new-chatroom-server" placeholder="Server">
+                        <div class="button-group">
+                            <input type="submit" class="left" name="join" value="Join Room">
+                            <input type="button" class="right" name="show" id="show-rooms" value="Show rooms">
+                        </div>
+                    </form>
+                    <dl id="available-chatrooms"></dl>
+                </div>
+            </div>
+        </div>
+

@@ -1,0 +1,91 @@
+    <div class="chatbox" id="2KTnLan/Qr1Gb7HkOwCjtjzMb8Q=" style="display: block;">
+        <div class="box-flyout" style="height: 400px">
+            <div class="dragresize dragresize-tm"></div>
+            <div class="chat-head chat-head-chatbox">
+                <a class="close-chatbox-button icon-close" ng-click="close()"></a>
+                <a class="toggle-chatbox-button icon-minus"></a>
+                <div class="chat-title">
+{{to}}
+
+                </div>
+                <p ng-if="user.presence.status" class="user-custom-message" title=" ({{user.presence.status}})">({{user.presence.status}})</p>
+                <p></p>
+            </div>
+            <div class="chat-body">
+                <div class="chat-content" scroll-glue="glued">
+                    <div class="chat-message " ng-repeat="message in chat.items track by $index">
+                        <span ng-if="message.to==to" class="chat-message-me">{{message.sendtime|date:'hh:mm'}} me:&nbsp;</span>
+                        <span ng-if="message.from.jid==to" class="chat-message-them">{{message.receivetime|date:'hh:mm'}} {{message.from.jid}}:&nbsp;</span>
+                        <span ng-if="message.to==to || message.from.jid==to"class="chat-message-content">{{message.content}} </span>
+                    </div>
+                    <!--
+                    <div class="chat-event">robotnic@laos.buddycloud.com has gone away</div>
+                    -->
+                </div>
+                <form class="sendXMPPMessage" action="" method="post">
+
+                    <ul class="chat-toolbar no-text-select">
+                        <li class="toggle-clear">
+                            <a class="icon-remove" title="Clear all messages"></a>
+                        </li>
+                        <li class="toggle-otr unencrypted" title="Your messages are not encrypted. Click here to enable OTR encryption.">
+                            <span class="chat-toolbar-text">unencrypted</span>
+
+                            <span class="icon-unlocked"></span>
+                            <ul>
+                                <li><a class="start-otr" href="#">Start encrypted conversation</a>
+                                </li>
+                                <li><a href="http://www.cypherpunks.ca/otr/help/3.2.0/levels.php" target="_blank">What's this?</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="toggle-smiley icon-happy" title="Insert a smilery">
+                            <ul style="display: none;">
+                                <li>
+                                    <a class="icon-smiley" href="#" data-emoticon=":)"></a>
+                                </li>
+                                <li>
+                                    <a class="icon-wink" href="#" data-emoticon=";)"></a>
+                                </li>
+                                <li>
+                                    <a class="icon-grin" href="#" data-emoticon=":D"></a>
+                                </li>
+                                <li>
+                                    <a class="icon-tongue" href="#" data-emoticon=":P"></a>
+                                </li>
+                                <li>
+                                    <a class="icon-cool" href="#" data-emoticon="8)"></a>
+                                </li>
+                                <li>
+                                    <a class="icon-evil" href="#" data-emoticon=">:)"></a>
+                                </li>
+                                <li>
+                                    <a class="icon-confused" href="#" data-emoticon=":S"></a>
+                                </li>
+                                <li>
+                                    <a class="icon-wondering" href="#" data-emoticon=":\"></a>
+                                </li>
+                                <li>
+                                    <a class="icon-angry" href="#" data-emoticon=">:("></a>
+                                </li>
+                                <li>
+                                    <a class="icon-sad" href="#" data-emoticon=":("></a>
+                                </li>
+                                <li>
+                                    <a class="icon-shocked" href="#" data-emoticon=":O"></a>
+                                </li>
+                                <li>
+                                    <a class="icon-thumbs-up" href="#" data-emoticon="(^.^)b"></a>
+                                </li>
+                                <li>
+                                    <a class="icon-heart" href="#" data-emoticon="<3"></a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <textarea type="text" class="chat-textarea" ng-model="newmessage.value" placeholder="Personal message" ng-keypress="($event.which === 13)?send(to,newmessage):0"></textarea>
+                </form>
+            </div>
+        </div>
+    </div>
